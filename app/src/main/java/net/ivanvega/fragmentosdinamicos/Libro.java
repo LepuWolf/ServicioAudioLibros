@@ -7,15 +7,15 @@ public class Libro {
     static Vector<Libro> libros = new Vector<Libro>();
     static{
         final String SERVIDOR =
-                "https://www.audiomol.com/media/dinamico/libros/demos/";
+                "https://www.sonolibro.com/assets/uploads/preview/";
 
-        libros.add(new Libro("Kappa", "Akutagawa", R.drawable.kappa, SERVIDOR + "La_metamorfosis.mp3", Libro.G_S_XIX, false, false));
-        libros.add(new Libro("Avecilla", "Alas Clarín, Leopoldo", R.drawable.avecilla, SERVIDOR + "en_la_colonia_penitenciaria.mp3", Libro.G_S_XIX, true, false));
-        libros.add(new Libro("Divina Comedia", "Dante", R.drawable.divina_comedia, SERVIDOR + "La_metamorfosis.mp3", Libro.G_EPICO, true, false));
-        libros.add(new Libro("Viejo Pancho, El", "Alonso y Trelles, José", R.drawable.viejo_pancho, SERVIDOR + "en_la_colonia_penitenciaria.mp3", Libro.G_S_XIX, true, true));
-        libros.add(new Libro("Canción de Rolando", "Anónimo", R.drawable.cancion_rolando, SERVIDOR + "en_la_colonia_penitenciaria.mp3", Libro.G_EPICO, false, true));
-        libros.add(new Libro("Matrimonio de sabuesos", "Agata Christie", R.drawable.matrim_sabuesos, SERVIDOR + "en_la_colonia_penitenciaria.mp3", Libro.G_SUSPENSE, false, true));
-        libros.add(new Libro("La iliada", "Homero", R.drawable.la_iliada, SERVIDOR + "la_iliada.mp3", Libro.G_EPICO, true, false));
+        libros.add(new Libro("Kappa", "Akutagawa", R.drawable.kappa, SERVIDOR + "pr_efecto_midas.mp3", Libro.G_S_XIX, false, false));
+        libros.add(new Libro("Avecilla", "Alas Clarín, Leopoldo", R.drawable.avecilla, SERVIDOR + "70_trucos_para_sacarle_brillo_a_tu_novela.mp3", Libro.G_S_XIX, true, false));
+        libros.add(new Libro("Divina Comedia", "Dante", R.drawable.divina_comedia, SERVIDOR + "PR_Aladino%20y%20la%20lampara%20maravillosa.mp3", Libro.G_EPICO, true, false));
+        libros.add(new Libro("Viejo Pancho, El", "Alonso y Trelles, José", R.drawable.viejo_pancho, SERVIDOR + "Siberia%20demo.mp3", Libro.G_S_XIX, true, true));
+        libros.add(new Libro("Canción de Rolando", "Anónimo", R.drawable.cancion_rolando, SERVIDOR + "hackers_en_nuestras_vidas.mp3", Libro.G_EPICO, false, true));
+        libros.add(new Libro("Matrimonio de sabuesos", "Agata Christie", R.drawable.matrim_sabuesos, SERVIDOR + "pr_efecto_midas.mp3", Libro.G_SUSPENSE, false, true));
+        libros.add(new Libro("La iliada", "Homero", R.drawable.la_iliada, SERVIDOR + "PR_Aladino%20y%20la%20lampara%20maravillosa.mp3", Libro.G_EPICO, true, false));
     }
 
     public String getTitulo() {

@@ -1,8 +1,13 @@
 package net.ivanvega.fragmentosdinamicos;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationChannelCompat;
+import androidx.core.app.NotificationCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
     }
 
     public void mostrarDetalle(int pos) {
@@ -46,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             detalleFragment.setArguments(
                     bundle
             );
+
 
             getSupportFragmentManager().beginTransaction().
                     setReorderingAllowed(true)

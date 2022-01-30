@@ -87,8 +87,8 @@ public class SelectorFragment extends Fragment {
 
         View layout =inflater
                 .inflate(R.layout.fragment_selector_layout,
-                container,
-                false);
+                        container,
+                        false);
 
 //        TextView   txtLbl = layout.findViewById(R.id.lblSF);
 //
@@ -98,21 +98,21 @@ public class SelectorFragment extends Fragment {
                 layout.findViewById(R.id.recyclerViewLibros);
 
         MiAdaptadorPersonalizado miAdaptadorPersonalizado =
-        new MiAdaptadorPersonalizado(getActivity() ,
-                Libro.ejemplosLibros()
+                new MiAdaptadorPersonalizado(getActivity() ,
+                        Libro.ejemplosLibros()
                 )        ;
 
         miAdaptadorPersonalizado.setOnClickLister(view ->
-            {
-                int pos =
-                        recyclerViewLibros.
-                                getChildAdapterPosition(view);
-                Toast.makeText(getActivity(),
-                        "ELement at selected" + pos,
-                        Toast.LENGTH_LONG).show();
+                {
+                    int pos =
+                            recyclerViewLibros.
+                                    getChildAdapterPosition(view);
+                    Toast.makeText(getActivity(),
+                            "ELement at selected" + pos,
+                            Toast.LENGTH_LONG).show();
 
-                ((MainActivity)this.contexto).mostrarDetalle(pos);
-            }
+                    ((MainActivity)this.contexto).mostrarDetalle(pos);
+                }
         );
 
         miAdaptadorPersonalizado.
@@ -127,48 +127,48 @@ public class SelectorFragment extends Fragment {
                     AlertDialog.Builder   dialog =
                             new AlertDialog.Builder(
                                     contexto)
-                            .setTitle("Audio Libros")
-                            .setItems(menuContextItem,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(getContext(), ""+ i,
-                                            Toast.LENGTH_LONG).show();
-                                    switch (i){
-                                        case 0:
-                                            Intent intent = new Intent(Intent.ACTION_SEND);
-                                            intent.setType("text/plain");
-                                            intent.putExtra(Intent.EXTRA_SUBJECT,
-                                                    Libro.ejemplosLibros()
-                                                            .elementAt(posLibro).getTitulo());
+                                    .setTitle("Audio Libros")
+                                    .setItems(menuContextItem,
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Toast.makeText(getContext(), ""+ i,
+                                                            Toast.LENGTH_LONG).show();
+                                                    switch (i){
+                                                        case 0:
+                                                            Intent intent = new Intent(Intent.ACTION_SEND);
+                                                            intent.setType("text/plain");
+                                                            intent.putExtra(Intent.EXTRA_SUBJECT,
+                                                                    Libro.ejemplosLibros()
+                                                                            .elementAt(posLibro).getTitulo());
 
-                                            intent.putExtra(Intent.EXTRA_TEXT,
-                                                    Libro.ejemplosLibros()
-                                                            .elementAt(posLibro).getUrl());
+                                                            intent.putExtra(Intent.EXTRA_TEXT,
+                                                                    Libro.ejemplosLibros()
+                                                                            .elementAt(posLibro).getUrl());
 
-                                            startActivity(intent);
+                                                            startActivity(intent);
 
-                                            break;
-                                        case 1:
+                                                            break;
+                                                        case 1:
 
-                                            Libro.ejemplosLibros().add(
-                                                    Libro.ejemplosLibros().get(posLibro)
-                                            );
-                                            miAdaptadorPersonalizado
-                                                    .notifyItemInserted(
-                                                            Libro.ejemplosLibros().size()-1);
-                                            break;
+                                                            Libro.ejemplosLibros().add(
+                                                                    Libro.ejemplosLibros().get(posLibro)
+                                                            );
+                                                            miAdaptadorPersonalizado
+                                                                    .notifyItemInserted(
+                                                                            Libro.ejemplosLibros().size()-1);
+                                                            break;
 
-                                        case 2:
-                                            Libro.ejemplosLibros().remove(posLibro);
-                                            miAdaptadorPersonalizado.notifyItemRemoved(posLibro);
-                                            break;
-                                    }
+                                                        case 2:
+                                                            Libro.ejemplosLibros().remove(posLibro);
+                                                            miAdaptadorPersonalizado.notifyItemRemoved(posLibro);
+                                                            break;
+                                                    }
 
-                                }
-                            });
+                                                }
+                                            });
 
-                            dialog.create().show();
+                    dialog.create().show();
 
                     return false;
                 });

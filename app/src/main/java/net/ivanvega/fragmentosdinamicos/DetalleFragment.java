@@ -1,7 +1,7 @@
 package net.ivanvega.fragmentosdinamicos;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,11 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +22,7 @@ import java.io.IOException;
  * create an instance of this fragment.
  */
 public class DetalleFragment extends Fragment
-    implements MediaPlayer.OnPreparedListener,
+        implements MediaPlayer.OnPreparedListener,
         MediaController.MediaPlayerControl,
         View.OnTouchListener
 
@@ -99,19 +96,19 @@ public class DetalleFragment extends Fragment
                 new ArrayAdapter(getActivity(),
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1, generos
-                        );
+                );
 
         spinner.setAdapter(adapter);
 
-          Bundle args = getArguments();
+        Bundle args = getArguments();
 
-          if(args != null){
-               int idLibro =
-                       args.getInt(DetalleFragment.ARG_INDEX_LIBRO);
-               setInfoLibro(idLibro,layout );
-          }else{
-              setInfoLibro(0, layout);
-          }
+        if(args != null){
+            int idLibro =
+                    args.getInt(DetalleFragment.ARG_INDEX_LIBRO);
+            setInfoLibro(idLibro,layout );
+        }else{
+            setInfoLibro(0, layout);
+        }
 
 
         return layout;
@@ -128,21 +125,10 @@ public class DetalleFragment extends Fragment
         lblAutor.setText(libro.getAutor());
         imvPortada.setImageResource(libro.getRecursoImagen());
 
-        if( mediaPlayer!= null){
-            mediaPlayer.release();
-        }
-
-            mediaPlayer = new MediaPlayer();
-            mediaController = new MediaController(getActivity());
-            mediaPlayer.setOnPreparedListener(this);
-            try {
-                mediaPlayer.setDataSource(getActivity(),
-                        Uri.parse(libro.getUrl()));
-                mediaPlayer.prepareAsync();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+        Intent serviceIntent = new Intent(getActivity(), BackgroundService.class);
+        serviceIntent.putExtra("uri", libro.ejemplosLibros().get(idLibro).getUrl());
+        serviceIntent.putExtra("titulo", Libro.ejemplosLibros().get(idLibro).getTitulo());
+        getActivity().startService(serviceIntent);
     }
 
 
@@ -161,8 +147,6 @@ public class DetalleFragment extends Fragment
         mediaController.setEnabled(true);
         mediaController.show();
         mediaPlayer.start();
-
-
     }
 
     @Override
@@ -228,8 +212,9 @@ public class DetalleFragment extends Fragment
 
     @Override
     public void onStop() {
-        mediaPlayer.stop();
-        mediaPlayer.release();
+        //mediaPlayer.stop();
+        //mediaPlayer.release();
+
         super.onStop();
     }
 }
